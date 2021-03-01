@@ -20,9 +20,11 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.androiddevchallenge.ui.detail.launchDetailsActivity
+import com.example.androiddevchallenge.ui.list.OnPuppyClicked
+import com.example.androiddevchallenge.ui.list.PuppyList
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                MyApp()
+                MyApp(onClick = { launchDetailsActivity(context = this, id = it) })
             }
         }
     }
@@ -38,9 +40,9 @@ class MainActivity : AppCompatActivity() {
 
 // Start building your app here!
 @Composable
-fun MyApp() {
+fun MyApp(onClick: OnPuppyClicked) {
     Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
+        PuppyList(onClick = onClick)
     }
 }
 
@@ -48,7 +50,7 @@ fun MyApp() {
 @Composable
 fun LightPreview() {
     MyTheme {
-        MyApp()
+        MyApp(onClick = { })
     }
 }
 
@@ -56,6 +58,6 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
-        MyApp()
+        MyApp(onClick = { })
     }
 }
